@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<header class="navbar">
+    <div class="brand"><span class="logo">🇧🇷</span><strong>Brasil Conecta</strong></div>
+    <a class="btn green" href="/">Voltar</a>
+</header>
+<main class="section page-list">
+    <h1>{{ title }}</h1>
+    <div class="cards-grid">
+        {% for item in items %}
+        <article class="simple-card">
+            <h3>{{ item.name|default:item.title }}</h3>
+            <p>{{ item.description|default:item.city }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

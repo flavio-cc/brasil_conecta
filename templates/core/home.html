@@ -1,0 +1,153 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<header class="navbar">
+    <div class="brand">
+        <span class="logo">🇧🇷</span>
+        <div>
+            <strong>Brasil Conecta</strong>
+            <small>Conectando nossa comunidade</small>
+        </div>
+    </div>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/servicos/">Serviços</a>
+        <a href="/produtos/">Produtos</a>
+        <a href="/grupos/">Grupos</a>
+        <a href="#">Como funciona</a>
+    </nav>
+    <div class="actions">
+        <a class="btn ghost" href="#">Entrar</a>
+        <a class="btn green" href="#">Cadastrar</a>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Encontre serviços, produtos e grupos da <span>comunidade brasileira</span> perto de você</h1>
+            <p>Conectando brasileiros e valorizando nossos profissionais.</p>
+            <div class="hero-buttons">
+                <a class="btn green" href="/servicos/">🔎 Procurar prestador</a>
+                <a class="btn yellow" href="#">➕ Divulgar meu serviço</a>
+            </div>
+        </div>
+        <div class="hero-card">
+            <div class="person">👩‍🍳</div>
+            <div class="badge">✅ Profissionais verificados</div>
+        </div>
+    </section>
+
+    <section class="search-box">
+        <label>
+            Que serviço você procura?
+            <input type="text" placeholder="Ex.: eletricista, manicure, professora...">
+        </label>
+        <label>
+            Cidade ou bairro
+            <input type="text" placeholder="Ex.: Montreal, Longueuil, Brossard">
+        </label>
+        <button>Buscar</button>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            <h2>Categorias populares</h2>
+            <a href="#">Ver todas</a>
+        </div>
+        <div class="category-grid">
+            {% for category in categories %}
+            <div class="category-card">
+                <div class="icon">{{ category.icon }}</div>
+                <strong>{{ category.name }}</strong>
+                <small>{{ category.service_count }} serviços</small>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            <h2>Serviços em destaque</h2>
+            <a href="/servicos/">Ver todos</a>
+        </div>
+        <div class="cards-grid">
+            {% for service in services %}
+            <article class="service-card">
+                <img src="{{ service.image_url }}" alt="{{ service.name }}">
+                {% if service.verified %}<span class="verified">Verificado</span>{% endif %}
+                <div class="card-body">
+                    <h3>{{ service.name }}</h3>
+                    <p>{{ service.category.name }} • {{ service.city }}, {{ service.province }}</p>
+                    <p>⭐ {{ service.rating }} ({{ service.review_count }})</p>
+                    <div class="card-actions">
+                        <a class="btn whatsapp" href="https://wa.me/{{ service.whatsapp }}">WhatsApp</a>
+                        <a class="btn ghost" href="#">Ver perfil</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="two-columns">
+        <div class="section">
+            <div class="section-title">
+                <h2>Produtos recentes</h2>
+                <a href="/produtos/">Ver todos</a>
+            </div>
+            <div class="mini-grid">
+                {% for product in products %}
+                <article class="mini-card">
+                    <img src="{{ product.image_url }}" alt="{{ product.title }}">
+                    <strong>{{ product.title }}</strong>
+                    <span>CA$ {{ product.price }}</span>
+                    <small>{{ product.city }}</small>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <h2>Grupos da comunidade</h2>
+                <a href="/grupos/">Ver todos</a>
+            </div>
+            <div class="group-list">
+                {% for group in groups %}
+                <div class="group-item">
+                    <span>{{ group.icon }}</span>
+                    <div>
+                        <strong>{{ group.name }}</strong>
+                        <small>{{ group.members }} membros</small>
+                    </div>
+                    <button>Participar</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div>
+            <h2>É prestador de serviços?</h2>
+            <p>Divulgue seu trabalho para milhares de brasileiros na sua região. É grátis!</p>
+        </div>
+        <a class="btn green" href="#">Cadastrar meu serviço grátis</a>
+    </section>
+</main>
+
+<footer>
+    <strong>🇧🇷 Brasil Conecta</strong>
+    <p>© 2026. Feito para fortalecer a comunidade brasileira.</p>
+</footer>
+
+<nav class="bottom-nav">
+    <a href="/">🏠<span>Início</span></a>
+    <a href="/servicos/">🔎<span>Serviços</span></a>
+    <a href="/produtos/">🛍️<span>Produtos</span></a>
+    <a href="/grupos/">👥<span>Grupos</span></a>
+    <a href="#">👤<span>Entrar</span></a>
+</nav>
+
+{% endblock %}
